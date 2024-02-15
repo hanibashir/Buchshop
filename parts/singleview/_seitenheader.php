@@ -44,7 +44,9 @@ Wosny.net – Ihr Spezialist für Bücher und mehr!
                 </div>
                 <div class="modal-footer bg-dark">
                     <span class="text-white">Ich möchte ein Konto anlegen</span>
-                    <button type="button" class="btn btn-outline-light">Konto anlegen</button>
+                    <form action="register.php" method="get" style="display: inline;">
+                        <button type="submit" class="btn btn-outline-light">Konto anlegen</button>
+                    </form>
                 </div>
             </div>
         </div>
