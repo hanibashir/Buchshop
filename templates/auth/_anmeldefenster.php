@@ -27,7 +27,9 @@
                         <label for="passwordInput">Passwort</label>
                         <input type="password" class="form-control" id="passwordInput" placeholder="Passwort">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">Anmelden</button>
+                    <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-warning btn-block">Anmelden</button>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer bg-dark">

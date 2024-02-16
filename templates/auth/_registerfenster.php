@@ -72,7 +72,7 @@ CREATE TABLE `kunden` (
             <div class="modal-footer bg-dark">
                 <span class="text-white">Bereits Kunde?</span>
                 <button type="button" class="btn btn-outline-light">
-                    <a class="nav-link text-warning" href="#" data-toggle="modal" data-target="#loginModal">Anmelden</a>
+                    <a class="nav-link text-warning" href="./?page=login">Anmelden</a>
 
                 </button>
             </div>

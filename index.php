@@ -2,15 +2,15 @@
 require_once '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'connection.php';
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'config.php';
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'router.php';
-$config = getConfig();
+//$config = getConfig();
 $templates_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
 $single_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single_view' . DIRECTORY_SEPARATOR;
 $main_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'main_view' . DIRECTORY_SEPARATOR;
 $components_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR;
 $auth_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'auth' . DIRECTORY_SEPARATOR;
-$view = getRoute();
-$title = $view['title'];
 
+$view = getRoute();
+//$title = $view['title'];
 
 include $templates_pf . '_header.php';
 include $components_pf . '_seitenheader.php';

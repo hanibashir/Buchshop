@@ -6,7 +6,7 @@
             <!-- Buch 1 -->
             <div class="col mb-3">
                 <div class="card h-100">
-                    <img src="img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
+                    <img src="/static/img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
                     <div class="card-body">
                         <h5 class="card-title">Buchtitel 1</h5>
                         <p class="card-text"><small>Autor 1</small></p>
@@ -18,7 +18,7 @@
             </div>
             <div class="col mb-3">
                 <div class="card h-100">
-                    <img src="img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
+                    <img src="/static/img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
                     <div class="card-body">
                         <h5 class="card-title">Buchtitel 2</h5>
                         <p class="card-text"><small>Autor 2</small></p>
@@ -30,7 +30,7 @@
             </div>
             <div class="col mb-3">
                 <div class="card h-100">
-                    <img src="img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
+                    <img src="/static/img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
                     <div class="card-body">
                         <h5 class="card-title">Buchtitel 3</h5>
                         <p class="card-text"><small>Autor 3</small></p>
@@ -42,7 +42,7 @@
             </div>
             <div class="col mb-3">
                 <div class="card h-100">
-                    <img src="img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
+                    <img src="/static/img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
                     <div class="card-body">
                         <h5 class="card-title">Buchtitel 4</h5>
                         <p class="card-text"><small>Autor 4</small></p>
@@ -54,7 +54,7 @@
             </div>
             <div class="col mb-3">
                 <div class="card h-100">
-                    <img src="img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
+                    <img src="/static/img/Buchcover1.jpg" class="card-img-top" alt="Buchcover Neuheit 1">
                     <div class="card-body">
                         <h5 class="card-title">Buchtitel 5</h5>
                         <p class="card-text"><small>Autor 5</small></p>

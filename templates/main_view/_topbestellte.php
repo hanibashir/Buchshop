@@ -6,7 +6,7 @@
                 <div class="row g-0">
                     <!-- Buchcover mit angepasster Größe -->
                     <div class="col-md-4 d-flex justify-content-center align-items-center">
-                        <img src="img/Buchcover1.jpg" class="img-fluid rounded-start book-cover" alt="Buchcover 1">
+                        <img src="/static/img/Buchcover1.jpg" class="img-fluid rounded-start book-cover" alt="Buchcover 1">
                     </div>
                     <!-- Buchdetails -->
                     <div class="col-md-8">
