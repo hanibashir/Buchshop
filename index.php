@@ -11,5 +11,5 @@ include $pf . '_seitenheader.php';
 include $pf . '../components/_navsuchfeld.php';
 include $pf . '../components/_navkategorien.php';
 include $view['template'];
-include $pf . '_ueberuns.php';
+//include $pf . '_ueberuns.php';
 include $pf . '../_footer.php';
