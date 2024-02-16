@@ -1,7 +1,7 @@
 <?php
 function getRoute()
 {
-    $pf = getConfig()['general']['templatePath'];
+    $templates_pf = getConfig()['general']['templatePath'];
     if (array_key_exists('page', $_GET)) {
         $page = $_GET['page'];
     } else {
@@ -16,7 +16,7 @@ function getRoute()
         case 'register': // Fall für die Registrierungsseite hinzufügen
             return [
                 'title' => 'Registrierung',
-                'template' => $pf . '_registerform.php' // Angenommen, deine Registrierungsformular-Datei heißt '_registerform.php'
+                'template' => $templates_pf . 'auth/_registerform.php' // Angenommen, deine Registrierungsformular-Datei heißt '_registerform.php'
             ];
         default:
             return getConfig()['pages']['main'];

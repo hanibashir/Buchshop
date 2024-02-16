@@ -1,5 +1,5 @@
 <!-- Bilder Wrapper -->
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/parts/utils/_bilderwrapper.php"; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/templates/utils/_bilderwrapper.php"; ?>
 <!--WERBEBANNER-->
 <?php //include "_werbebanner.php"; ?>
 <!--Buch-Neuheiten-->
@@ -9,8 +9,7 @@
     <?php include "_topbestellte.php"; ?>
 
 
-
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/parts/components/_pagination.php"; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/templates/components/_pagination.php"; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

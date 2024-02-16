@@ -3,15 +3,19 @@ require_once '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'data' 
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'config.php';
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'router.php';
 $config = getConfig();
-$pf = '.' . DIRECTORY_SEPARATOR . 'parts' . DIRECTORY_SEPARATOR . 'singleview' . DIRECTORY_SEPARATOR;
+$templates_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
+$single_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single_view' . DIRECTORY_SEPARATOR;
+$main_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'main_view' . DIRECTORY_SEPARATOR;
+$components_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR;
+$auth_pf = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'auth' . DIRECTORY_SEPARATOR;
 $view = getRoute();
 $title = $view['title'];
 
 
-include $pf . '../_header.php';
-include $pf . '../components/_seitenheader.php';
-include $pf . '../components/_navsuchfeld.php';
-include $pf . '../components/_navkategorien.php';
+include $templates_pf . '_header.php';
+include $components_pf . '_seitenheader.php';
+include $components_pf . '_navsuchfeld.php';
+include $components_pf . '_navkategorien.php';
 include $view['template'];
 //include $pf . '_ueberuns.php';
-include $pf . '../_footer.php';
+include $templates_pf . '_footer.php';

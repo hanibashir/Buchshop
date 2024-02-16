@@ -14,7 +14,7 @@
             </div>
         </div>
         <!-- include login form -->
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/parts/auth/_anmeldefenster.php"; ?>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/parts/auth/_registerfenster.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/templates/auth/_anmeldefenster.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/templates/auth/_registerfenster.php"; ?>
 
 </nav>
