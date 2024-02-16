@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="#">
-            <img src="img/logo.webp" alt="Logo" style="height: 50px;">
+            <img src="../../img/logo.webp" alt="Logo" style="height: 50px;">
         </a>
         <!-- Toggler für kleinere Bildschirme -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
