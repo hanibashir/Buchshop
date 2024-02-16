@@ -1,13 +1,14 @@
 <?php
-function getRoute(){
+function getRoute()
+{
     $pf = getConfig()['general']['templatePath'];
-    if (array_key_exists('page', $_GET)){
+    if (array_key_exists('page', $_GET)) {
         $page = $_GET['page'];
     } else {
         $page = 'main';
     }
 
-    switch ($page){
+    switch ($page) {
         case 'main':
             return getConfig()['pages']['main'];
         case 'single':
