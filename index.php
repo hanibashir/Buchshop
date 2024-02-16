@@ -1,10 +1,12 @@
 <?php
+require_once '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'connection.php';
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'config.php';
 include '.' . DIRECTORY_SEPARATOR . 'logic' . DIRECTORY_SEPARATOR . 'router.php';
 $config = getConfig();
 $pf = '.' . DIRECTORY_SEPARATOR . 'parts' . DIRECTORY_SEPARATOR . 'singleview' . DIRECTORY_SEPARATOR;
 $view = getRoute();
 $title = $view['title'];
+
 
 include $pf . '../_header.php';
 include $pf . '_seitenheader.php';
