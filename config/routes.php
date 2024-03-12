@@ -11,15 +11,19 @@ $router = new Framework\Router;
 $router->add("/", ["controller" => "home", "action" => "index"]);
 $router->add("/home/index", ["controller" => "home", "action" => "index"]);
 // books
-$router->add("/product/{slug:[\w-]+}", ["controller" => "books", "action" => "show"]);
-$router->add("/products", ["controller" => "books", "action" => "index"]);
+$router->add("/book/{slug:[\w-]+}", ["controller" => "books", "action" => "show"]);
+$router->add("/books", ["controller" => "books", "action" => "index"]);
+
 // Auth
+$router->add("/register", ["controller" => "register", "action" => "index", "namespace" => "Auth"]);
+$router->add("/login", ["controller" => "login", "action" => "index", "namespace" => "Auth"]);
+
 // admin
 $router->add("/admin/{controller}/{action}", ["namespace" => "Admin"]);
-// user
-
+// users
+$router->add("/users", ["controller" => "users", "action" => "index"]);
 # generic route path
-$router->add("/{controller}/{id:\d+}/{action}");
-$router->add("/{controller}/{action}");
+//$router->add("/{controller}/{id:\d+}/{action}");
+//$router->add("/{controller}/{action}");
 
 return $router;

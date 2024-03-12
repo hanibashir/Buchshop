@@ -29,6 +29,7 @@ readonly class Dispatcher
          * to match the controller file name
          */
         $controller = $this->getControllerName($params);
+
         $action = $this->getActionName($params);
 
         $controller_obj = $this->container->get($controller);
@@ -96,6 +97,7 @@ readonly class Dispatcher
         if (array_key_exists("namespace", $params)) {
             $namespace .= "\\" . $params['namespace'];
         }
+
         return $namespace . "\\" . $controller;
     }
 

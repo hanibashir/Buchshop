@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Admin;
+namespace App\Controllers;
 
-class Users
+class Users extends Controller
 {
     public function index()
     {
         echo "Hello from users controller";
     }
+
 }

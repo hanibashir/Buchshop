@@ -24,7 +24,7 @@
                     </button>
                 </div>
                 <div class="modal-body bg-dark text-white">
-                    <form>
+                    <form action="/login" method="post">
                         <div class="mb-3">
                             <input type="radio" id="customerType" name="userType" value="customer" checked>
                             <label for="customerType" class="mr-2">Kunde</label>
@@ -32,19 +32,23 @@
                             <label for="businessType">Unternehmen</label>
                         </div>
                         <div class="form-group">
-                            <label for="emailInput">E-Mail</label>
-                            <input type="email" class="form-control" id="emailInput" placeholder="E-Mail eingeben">
+                            <label for="email">E-Mail</label>
+                            <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
-                            <label for="passwordInput">Passwort</label>
-                            <input type="password" class="form-control" id="passwordInput" placeholder="Passwort">
+                            <label for="password">Passwort</label>
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <button type="submit" class="btn btn-warning btn-block">Anmelden</button>
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">
                     <span class="text-white">Ich möchte ein Konto anlegen</span>
-                    <button type="button" class="btn btn-outline-light">Konto anlegen</button>
+                    <a href="/register">
+                        <button type="button" class="btn btn-outline-light">
+                            Konto anlegen
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
