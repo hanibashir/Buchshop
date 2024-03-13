@@ -15,7 +15,10 @@ $router->add("/book/{slug:[\w-]+}", ["controller" => "books", "action" => "show"
 $router->add("/books", ["controller" => "books", "action" => "index"]);
 
 // Auth
+// register
 $router->add("/register", ["controller" => "register", "action" => "index", "namespace" => "Auth"]);
+$router->add("/register/create", ["controller" => "register", "action" => "create", "namespace" => "Auth"]);
+//login
 $router->add("/login", ["controller" => "login", "action" => "index", "namespace" => "Auth"]);
 
 // admin

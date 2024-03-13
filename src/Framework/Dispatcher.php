@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Framework;
 
+use App\Middleware\ChangeRequestExample;
+use App\Middleware\ChangeResponseExample;
 use Framework\Exceptions\PageNotFoundException;
 use UnexpectedValueException;
 use ReflectionException;
@@ -15,7 +17,7 @@ readonly class Dispatcher
     {
     }
 
-    public function handle(Request $request): void
+    public function handle(Request $request): Response
     {
         $path = $this->getPath($request->uri);
 
@@ -29,17 +31,18 @@ readonly class Dispatcher
          * to match the controller file name
          */
         $controller = $this->getControllerName($params);
-
         $action = $this->getActionName($params);
 
         $controller_obj = $this->container->get($controller);
 
-        $controller_obj->setRequest($request);
+        $controller_obj->setResponse($this->container->get(Response::class));
         $controller_obj->setViewer($this->container->get(TemplateViewerInterface::class));
 
         $args = $this->getActionArguments($controller_obj, $action, $params);
 
-        $controller_obj->$action(...$args);
+        $controller_handler = new ControllerRequestHandler($controller_obj, $action, $args);
+
+        return $controller_handler->handle($request);
     }
 
     private function getPath(string $uri): string
@@ -82,7 +85,6 @@ readonly class Dispatcher
         }
 
         return $args;
-
     }
 
 
@@ -97,7 +99,6 @@ readonly class Dispatcher
         if (array_key_exists("namespace", $params)) {
             $namespace .= "\\" . $params['namespace'];
         }
-
         return $namespace . "\\" . $controller;
     }
 
@@ -107,4 +108,5 @@ readonly class Dispatcher
 
         return lcfirst(str_replace('-', '', ucwords(strtolower($action), '-')));
     }
+
 }

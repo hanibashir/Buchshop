@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Models\Book;
 use Framework\Exceptions\PageNotFoundException;
+use Framework\Response;
 
 class Books extends Controller
 {
@@ -13,18 +14,17 @@ class Books extends Controller
     {
     }
 
-    public function index(): void
+    public function index(): Response
     {
 
-        $books = $this->model->findAll();
+        $products = $this->model->findAll();
 
-        echo $this->viewer->render("Books/index.mvc.php", [
-            "books" => $books
+        return $this->view("Books/index.bbq.php", [
+            "books" => $products
         ]);
-
     }
 
-    public function create(): void
+    public function create(): Response
     {
         if ($this->request->post) {
             $data = [
@@ -32,32 +32,31 @@ class Books extends Controller
                 "description" => empty($this->request->post["description"]) ? null : $this->request->post["description"]
             ];
             if ($this->model->insert($data)) {
-                header("Location: /products/{$this->model->getInsertedID()}/show");
-                exit;
+                return $this->redirect("/books/{$this->model->getInsertedID()}/show");
             } else {
 
-                echo $this->viewer->render("Products/create.mvc.php", [
+                return $this->view("Books/create.bbq.php", [
                     "errors" => $this->model->getErrors(),
-                    "product" => $data
+                    "book" => $data
                 ]);
             }
 
         } else { // GET request
-            echo $this->viewer->render("Products/create.mvc.php");
+            return $this->view("Books/create.bbq.php");
         }
     }
 
-    public function show(string $id): void
+    public function show(string $id): Response
     {
         $product = $this->get($id);
 
-        echo $this->viewer->render("Products/show.mvc.php", [
-            "product" => $product
+        return $this->view("Books/show.bbq.php", [
+            "book" => $product
         ]);
 
     }
 
-    public function edit(string $id): void
+    public function edit(string $id): Response
     {
         $product = $this->get($id);
         if ($this->request->post) {
@@ -65,43 +64,41 @@ class Books extends Controller
             $product["name"] = $this->request->post["name"];
             $product["description"] = empty($this->request->post["description"]) ? null : $this->request->post["description"];
             if ($this->model->update($id, $product)) {
-                header("Location: /products/{$id}/show");
-                exit;
+                return $this->redirect("/books/{$id}/show");
             } else {
 
-                echo $this->viewer->render("Products/edit.mvc.php", [
+                return $this->view("Books/edit.bbq.php", [
                     "errors" => $this->model->getErrors(),
-                    "product" => $product
+                    "book" => $product
                 ]);
             }
 
         } else { // GET request
 
-            echo $this->viewer->render("Products/edit.mvc.php", [
-                "product" => $product
+            return $this->view("Books/edit.bbq.php", [
+                "book" => $product
             ]);
         }
 
     }
 
-    public function delete(string $id): void
+    public function delete(string $id): Response
     {
         $product = $this->get($id);
 
         if ($this->request->server["REQUEST_METHOD"] === "POST") {
 
             if ($this->model->delete($id)) {
-                header("Location: /products");
-                exit;
+                return $this->redirect("/books");
             } else {
-                echo $this->viewer->render("Products/delete.mvc.php", [
+                return $this->view("Products/delete.bbq.php", [
                     "errors" => $this->model->getErrors(),
-                    "product" => $product
+                    "book" => $product
                 ]);
             }
 
         } else {
-            echo $this->viewer->render("Products/delete.mvc.php", [
+            return $this->view("Books/delete.bbq.php", [
                 "product" => $product
             ]);
         }

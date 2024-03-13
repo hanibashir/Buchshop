@@ -19,7 +19,7 @@ abstract class Model
             return $this->table_name;
         }
         /**
-         * $this::class return the subclass path e.g. App\Models\Product for Product Model Class.
+         * $this::class return the subclass path e.g. App\Models\Book for Book Model Class.
          * @method explode() generates an array of the string by using '\' as a separator between the elements.
          * @method array_pop() will pop elements from an array and return the last popped element.
          */
@@ -53,9 +53,10 @@ abstract class Model
 
     public function insert(array $data): bool
     {
+        // if not validate assign errors to errors array
         $this->validate($data);
-        if (!empty($this->errors)) {
 
+        if (!empty($this->errors)) {
             return false;
         }
         $columns = implode(", ", array_keys($data));

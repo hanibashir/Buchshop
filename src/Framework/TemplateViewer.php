@@ -1,9 +1,15 @@
 <?php
+/**
+ * Custom Template render
+ */
+
+declare(strict_types=1);
 
 namespace Framework;
 
 class TemplateViewer implements TemplateViewerInterface
 {
+
     public function render(string $template, array $data = []): false|string
     {
         $views_dir = dirname(__DIR__, 2) . "/views/";
@@ -14,21 +20,18 @@ class TemplateViewer implements TemplateViewerInterface
             $base = file_get_contents($views_dir . $matches["template"]);
 
             $blocks = $this->getBlocks($code);
-
             $code = $this->replaceYields($base, $blocks);
         }
 
         $code = $this->loadIncludes($views_dir, $code);
         $code = $this->replaceVariables($code);
-
         $code = $this->replacePHP($code);
 
         /**
-         * data contains an associative array e.g. [ "products" => $products] where $products is also an array
-         * @method extract() will extract the string key "products" as a variable and assign $products value to it
+         * data contains an associative array e.g. [ "books" => $books] where $books is also an array
+         * @method extract() will extract the string key "books" as a variable and assign $books value to it
          */
         extract($data, EXTR_SKIP);
-
         ob_start();
 
         eval("?>$code");

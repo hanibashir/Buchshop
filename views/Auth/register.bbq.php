@@ -1,45 +1,9 @@
 {% extends "base.bbq.php" %}
 
-{% extends "base.bbq.php" %}
 {% block title %}Register{% endblock %}
 {% block body %}
-<!--
-            CREATE TABLE `kunden` (
-              `kunden_id` int(11) NOT NULL,
-              `kd_vorname` varchar(255) DEFAULT NULL,
-              `kd_nachname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-              `email` varchar(255) DEFAULT NULL,
-              `telefonnummer` varchar(20) DEFAULT NULL,
-              `typ_id` int(11) DEFAULT NULL,
-              `konto_id` int(11) DEFAULT NULL
-            )
 
-            CREATE TABLE `typen_konten` (
-              `typ_id` int(11) NOT NULL,
-              `typ_name` varchar(100) NOT NULL
-            )
-            CREATE TABLE `lieferadressen`(
-              `lieferadressen_id` int(11) NOT NULL,
-              `kunden_id` int(11) DEFAULT NULL,
-              `straße` varchar(255) DEFAULT NULL,
-              `hausnr` int(11) NOT NULL,
-              `adresszeile` varchar(255) DEFAULT NULL,
-              `stadt` varchar(100) DEFAULT NULL,
-              `postleitzahl` varchar(20) DEFAULT NULL,
-              `land` varchar(100) DEFAULT NULL
-            )
-            CREATE TABLE `rechnung_adressen`(
-              `rechnungsadressen_id` int(11) NOT NULL,
-              `kunden_id` int(11) DEFAULT NULL,
-              `straße` varchar(255) DEFAULT NULL,
-              `hausnr` int(11) NOT NULL,
-              `adresszeile` varchar(255) DEFAULT NULL,
-              `stadt` varchar(100) DEFAULT NULL,
-              `postleitzahl` varchar(20) DEFAULT NULL,
-              `land` varchar(100) DEFAULT NULL
-            )
-        -->
-<form action="/register" method="post">
+<form action="/register/create" method="post">
     <div class="container my-3 py-2 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12">
@@ -69,21 +33,33 @@
                                     <!-- Vor- und Nachname row-->
                                     <div class="row">
                                         <div class="col-md-6 mb-2 pb-2">
-
                                             <div class="form-outline">
                                                 <label class="form-label" for="first_name">Vorname</label>
                                                 <input type="text" class="form-control" id="first_name"
-                                                       name="first_name">
+                                                       name="first_name" value="{{ input['first_name'] }}">
                                             </div>
+                                            {% if (isset($errors) && isset($errors["first_name"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["first_name"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
 
                                         </div>
+
                                         <div class="col-md-6 mb-2 pb-2">
 
                                             <div class="form-outline">
                                                 <label class="form-label" for="last_name">Nachname</label>
                                                 <input type="text" class="form-control" id="last_name"
-                                                       name="last_name">
+                                                       name="last_name" value="{{ input['last_name'] }}">
                                             </div>
+                                            {% if (isset($errors) && isset($errors["last_name"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["last_name"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
 
                                         </div>
                                     </div> <!-- //Vor- und Nachname row-->
@@ -91,22 +67,46 @@
                                     <div class="mb-2 pb-2">
                                         <div class="form-outline">
                                             <label class="form-label" for="email">E-Mail</label>
-                                            <input type="email" class="form-control" id="email" name="email">
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                   value="{{ input['email'] }}">
                                         </div>
+                                        {% if (isset($errors) && isset($errors["email"])): %}
+                                        <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                            <small>{{ errors["email"] }}</small>
+                                            <br>
+                                        </div>
+                                        {% endif; %}
                                     </div><!-- //E-Mail -->
 
                                     <!-- Passwort -->
                                     <div class="mb-2 pb-2">
-                                        <label class="form-label" for="password">Passwort</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="password">Passwort</label>
+                                            <input type="password" class="form-control" id="password" name="password">
+                                        </div>
+                                        {% if (isset($errors) && isset($errors["password"])): %}
+                                        <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                            <small>{{ errors["password"] }}</small>
+                                            <br>
+                                        </div>
+                                        {% endif; %}
                                     </div><!-- //Passwort -->
-                                    <!-- Passwort Bestätigung -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="confirm_password">Passwort Wiederholen</label>
-                                        <input type="password" class="form-control" id="confirm_password"
-                                               name="confirm_password">
-                                    </div><!-- //Passwort Bestätigung -->
 
+                                    <!-- Passwort Bestätigung -->
+                                    <div class="mb-2 pb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="confirm_password">Passwort
+                                                Wiederholen</label>
+                                            <input type="password" class="form-control" id="confirm_password"
+                                                   name="confirm_password">
+                                        </div>
+                                        {% if (isset($errors) && isset($errors["confirm_password"])): %}
+                                        <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                            <small>{{ errors["confirm_password"] }}</small>
+                                            <br>
+                                        </div>
+                                        {% endif; %}
+                                    </div><!-- //Passwort Bestätigung -->
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -117,8 +117,14 @@
                                         <div class="form-outline">
                                             <label class="form-label" for="street_house_no">Straße und Haus Nr.</label>
                                             <input type="text" id="street_house_no" name="street_house_no"
-                                                   class="form-control"/>
+                                                   class="form-control" value="{{ input['street_house_no'] }}"/>
                                         </div>
+                                        {% if (isset($errors) && isset($errors["street_house_no"])): %}
+                                        <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                            <small>{{ errors["street_house_no"] }}</small>
+                                            <br>
+                                        </div>
+                                        {% endif; %}
                                     </div><!-- //Straße und Haus Nr. -->
 
                                     <!-- PLZ und Stadt-->
@@ -127,14 +133,27 @@
                                             <div class="form-outline">
                                                 <label class="form-label" for="post_code">PLZ</label>
                                                 <input type="number" id="post_code" name="post_code"
-                                                       class="form-control"/>
+                                                       class="form-control" value="{{ input['post_code'] }}"/>
                                             </div>
+                                            {% if (isset($errors) && isset($errors["post_code"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["post_code"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
                                         </div>
                                         <div class="col-md-7 mb-2 pb-2">
                                             <div class="form-outline">
                                                 <label class="form-label" for="city">Stadt</label>
-                                                <input type="text" id="city" name="city" class="form-control"/>
+                                                <input type="text" id="city" name="city" class="form-control"
+                                                       value="{{ input['city'] }}"/>
                                             </div>
+                                            {% if (isset($errors) && isset($errors["city"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["city"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
                                         </div>
                                     </div> <!-- //PLZ und Stadt-->
 
@@ -142,7 +161,8 @@
                                     <div class="mb-2 pb-2">
                                         <div class="form-outline">
                                             <label class="form-label" for="phone">Telefon- oder Handynummer</label>
-                                            <input type="tel" id="phone" name="phone" class="form-control"/>
+                                            <input type="tel" id="phone" name="phone" class="form-control"
+                                                   value="{{ input['phone'] }}"/>
                                         </div>
                                     </div><!-- //Telefon- oder Handynummer -->
 
@@ -151,7 +171,8 @@
                                         <label class="form-check-label" for="check_bill_address">
                                             Abweichende Rechnungsadresse?
                                         </label>
-                                        <input class="form-check-input me-3" type="checkbox" value="0"
+
+                                        <input class="form-check-input me-3" type="checkbox"
                                                id="check_bill_address" name="check_bill_address"/>
                                     </div><!-- //Rechnungsadresse Checkbox -->
                                     <!-- Rechnungsadresse -->
@@ -163,8 +184,15 @@
                                                 <label class="form-label" for="bill_street_house_no">Straße und Haus
                                                     Nr.</label>
                                                 <input type="text" id="bill_street_house_no" name="bill_street_house_no"
-                                                       class="form-control"/>
+                                                       class="form-control"
+                                                       value="{{ input['bill_street_house_no'] }}"/>
                                             </div>
+                                            {% if (isset($errors) && isset($errors["bill_street_house_no"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["bill_street_house_no"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
                                         </div><!-- //Straße und Haus Nr. -->
 
                                         <!-- PLZ und Stadt-->
@@ -173,18 +201,31 @@
                                                 <div class="form-outline">
                                                     <label class="form-label" for="bill_post_code">PLZ</label>
                                                     <input type="number" id="bill_post_code" name="bill_post_code"
-                                                           class="form-control"/>
+                                                           class="form-control" value="{{ input['bill_post_code'] }}"/>
                                                 </div>
+                                                {% if (isset($errors) && isset($errors["bill_post_code"])): %}
+                                                <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                    <small>{{ errors["bill_post_code"] }}</small>
+                                                    <br>
+                                                </div>
+                                                {% endif; %}
                                             </div>
                                             <div class="col-md-7 mb-2 pb-2">
                                                 <div class="form-outline">
                                                     <label class="form-label" for="bill_city">Stadt</label>
                                                     <input type="text" id="bill_city" name="bill_city"
-                                                           class="form-control"/>
+                                                           class="form-control" value="{{ input['bill_city'] }}"/>
                                                 </div>
+                                                {% if (isset($errors) && isset($errors["bill_city"])): %}
+                                                <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                    <small>{{ errors["bill_city"] }}</small>
+                                                    <br>
+                                                </div>
+                                                {% endif; %}
                                             </div>
                                         </div> <!-- //PLZ und Stadt-->
                                     </div><!-- //Rechnungsadresse -->
+
 
                                 </div>
                             </div>
