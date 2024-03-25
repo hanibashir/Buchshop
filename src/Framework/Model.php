@@ -13,7 +13,7 @@ abstract class Model
     protected $table_name;
     protected array $errors = [];
 
-    private function getTable(): string
+    protected function getTable(): string
     {
         if ($this->table_name !== null) {
             return $this->table_name;
@@ -27,7 +27,7 @@ abstract class Model
         return strtolower(array_pop($parts));
     }
 
-    public function __construct(private readonly Database $database)
+    public function __construct(protected readonly Database $database)
     {
     }
 
@@ -53,13 +53,13 @@ abstract class Model
 
     public function insert(array $data): bool
     {
-        // if not validate assign errors to errors array
-        $this->validate($data);
+        $data = $this->validate($data);
 
         if (!empty($this->errors)) {
             return false;
         }
         $columns = implode(", ", array_keys($data));
+
         $value_placeholders = implode(", ", array_fill(0, count($data), "?"));
 
         $sql = "INSERT INTO {$this->getTable()} ($columns) VALUES ($value_placeholders)";
@@ -96,7 +96,6 @@ abstract class Model
 
     public function delete(string $id): bool
     {
-
         $sql = "DELETE FROM {$this->getTable()} WHERE `id` = :id";
         return $this->preparePDOStatement($sql, null, $id)->execute();
     }
@@ -119,8 +118,9 @@ abstract class Model
     }
 
     // to overridden by subclasses
-    protected function validate(array $data): void
+    protected function validate(array $data): array
     {
+        return [];
     }
 
     private function preparePDOStatement(string $sql, array $data = null, string $id = null): false|PDOStatement

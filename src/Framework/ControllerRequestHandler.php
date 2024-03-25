@@ -10,8 +10,8 @@ class ControllerRequestHandler implements RequestHandlerInterface
 {
     public function __construct(
         private Controller $controller,
-        private string $action,
-        private array $args
+        private string     $action,
+        private array      $args
     )
     {
     }

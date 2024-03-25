@@ -8,9 +8,9 @@ class Book extends Model
 {
     /**
      * @param array $data
-     * @return void
+     * @return array
      */
-    protected function validate(array $data): void
+    protected function validate(array $data): array
     {
         /** SQL Structure:
          * `buch_id` int(11) NOT NULL,

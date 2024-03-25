@@ -20,42 +20,6 @@ class Register extends Controller
 
     public function create(): Response
     {
-        /**
-         * CREATE TABLE `kunden` (
-         * `kunden_id` int(11) NOT NULL,
-         * `kd_vorname` varchar(255) DEFAULT NULL,
-         * `kd_nachname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-         * `email` varchar(255) DEFAULT NULL,
-         * `telefonnummer` varchar(20) DEFAULT NULL,
-         * `typ_id` int(11) DEFAULT NULL,
-         * `konto_id` int(11) DEFAULT NULL
-         * )
-         *
-         * CREATE TABLE `typen_konten` (
-         * `typ_id` int(11) NOT NULL,
-         * `typ_name` varchar(100) NOT NULL
-         * )
-         * CREATE TABLE `lieferadressen`(
-         * `lieferadressen_id` int(11) NOT NULL,
-         * `kunden_id` int(11) DEFAULT NULL,
-         * `straße` varchar(255) DEFAULT NULL,
-         * `hausnr` int(11) NOT NULL,
-         * `adresszeile` varchar(255) DEFAULT NULL,
-         * `stadt` varchar(100) DEFAULT NULL,
-         * `postleitzahl` varchar(20) DEFAULT NULL,
-         * `land` varchar(100) DEFAULT NULL
-         * )
-         * CREATE TABLE `rechnung_adressen`(
-         * `rechnungsadressen_id` int(11) NOT NULL,
-         * `kunden_id` int(11) DEFAULT NULL,
-         * `straße` varchar(255) DEFAULT NULL,
-         * `hausnr` int(11) NOT NULL,
-         * `adresszeile` varchar(255) DEFAULT NULL,
-         * `stadt` varchar(100) DEFAULT NULL,
-         * `postleitzahl` varchar(20) DEFAULT NULL,
-         * `land` varchar(100) DEFAULT NULL
-         * )
-         */
         if ($this->request->post) {
             $data = [
                 "userType" => $this->request->post["userType"],
