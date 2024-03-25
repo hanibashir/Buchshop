@@ -34,22 +34,9 @@ class User extends Model
             return false;
         }
 
+
         // kunden, angestellte oder unternehmen
         $this->setUserTableName($data);
-
-        /**
-         * [userType] => customer
-         * [first_name] => hani
-         * [last_name] => bashir
-         * [email] => example@example.com
-         * [password] => 123
-         * [confirm_password] => 123
-         * [street_house_no] => any
-         * [post_code] => 22589
-         * [city] => hh
-         * [phone] => 0158963333
-         */
-
 
         $type_name = "";
         if ($data["userType"] === 'customer')
@@ -65,7 +52,15 @@ class User extends Model
 
         $account_type = $this->getAccountType($conn, $type_name)->fetch();
 
-        return $this->insertUser($data, $account_type["typ_id"], $account_id, $conn);
+        $this->insertUser($data, $account_type["typ_id"], $account_id, $conn);
+
+        $user_id = $conn->lastInsertId();
+
+        if ($data['check_bill_address']) {
+            $this->insertUserBillingAddress($data, $user_id, $conn);
+        }
+
+        return $this->insertUserAddress($data, $user_id, $conn);
     }
 
     protected function validate(array $data): array
@@ -74,7 +69,8 @@ class User extends Model
 
         if (!$data['check_bill_address']) {
             unset($data['check_bill_address']);
-            unset($data['bill_street_house_no']);
+            unset($data['bill_street']);
+            unset($data['bill_house_no']);
             unset($data['bill_post_code']);
             unset($data['bill_city']);
 
@@ -144,7 +140,7 @@ class User extends Model
      * @param PDO $conn
      * @return bool
      */
-    public function insertUser(array $data, $typ_id, $account_id, PDO $conn): bool
+    public function insertUser(array $data, $typ_id, false|string $account_id, PDO $conn): bool
     {
         $user_data["kd_vorname"] = $data["first_name"];
         $user_data["kd_nachname"] = $data["last_name"];
@@ -164,23 +160,61 @@ class User extends Model
     }
 
     /**
-     * @param $data
-     * @param false|PDOStatement $stmt
+     * @param array $data
+     * @param string $user_id
+     * @param $conn
      * @return bool
      */
-    public function executeStatement($data, false|PDOStatement $stmt): bool
-    {
-        $i = 1;
-        foreach ($data as $value) {
-            $type = match (gettype($value)) {
-                "boolean" => PDO::PARAM_BOOL,
-                "integer" => PDO::PARAM_INT,
-                "NULL" => PDO::PARAM_NULL,
-                default => PDO::PARAM_STR
-            };
-            $stmt->bindValue($i++, $value, $type);
-        }
 
-        return $stmt->execute();
+    private function insertUserAddress(array $data, string $user_id, $conn): bool
+    {
+        $user_address['kunden_id'] = $user_id;
+        $user_address['straße'] = $data['street'];
+        $user_address['hausnr'] = $data['house_no'];
+        $user_address['adresszeile'] = ''; // TODO
+        $user_address['postleitzahl'] = $data['post_code'];
+        $user_address['stadt'] = $data['city'];
+        $user_address['land'] = 'Deutschland'; // TODO
+
+
+        $value_placeholders = implode(", ", array_fill(0, count($user_address), "?"));
+
+        $address_table_sql =
+            "INSERT INTO `lieferadressen` (`kunden_id`, `straße`, `hausnr`, `adresszeile`, `stadt`, `postleitzahl`, `land`) " .
+            "VALUES ($value_placeholders)";
+
+        $stmt = $conn->prepare($address_table_sql);
+
+        return $this->executeStatement($user_address, $stmt);
     }
+
+    /**
+     * @param array $data
+     * @param string $user_id
+     * @param $conn
+     * @return void
+     */
+
+    private function insertUserBillingAddress(array $data, $user_id, $conn): void
+    {
+        $user_address['kunden_id'] = $user_id;
+        $user_address['straße'] = $data['bill_street'];
+        $user_address['hausnr'] = $data['bill_house_no'];
+        $user_address['adresszeile'] = ''; // TODO
+        $user_address['postleitzahl'] = $data['bill_post_code'];
+        $user_address['stadt'] = $data['bill_city'];
+        $user_address['land'] = 'Deutschland'; // TODO
+
+        $value_placeholders = implode(", ", array_fill(0, count($user_address), "?"));
+
+        $address_table_sql =
+            "INSERT INTO `rechnung_adressen` (`kunden_id`, `straße`, `hausnr`, `adresszeile`, `stadt`, `postleitzahl`, `land`) " .
+            "VALUES ($value_placeholders)";
+
+        $stmt = $conn->prepare($address_table_sql);
+
+        $this->executeStatement($user_address, $stmt);
+
+    }
+
 }

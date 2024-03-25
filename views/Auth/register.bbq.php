@@ -113,18 +113,33 @@
                                 <div class="px-5 py-2">
                                     <h4 class="fw-normal mt-3 mb-4">Lieferadresse</h4>
                                     <!-- Straße und Haus Nr. -->
-                                    <div class="mb-2 pb-2">
-                                        <div class="form-outline">
-                                            <label class="form-label" for="street_house_no">Straße und Haus Nr.</label>
-                                            <input type="text" id="street_house_no" name="street_house_no"
-                                                   class="form-control" value="{{ input['street_house_no'] }}"/>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="street">Straße</label>
+                                                    <input type="text" id="street" name="street"
+                                                           class="form-control" value="{{ input['street'] }}"/>
+                                                </div>
+                                            </div>
+                                            {% if (isset($errors) && isset($errors["street"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["street"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
+                                            <div class="col-3">
+                                                <label for="house_no">Hausnummer</label>
+                                                <input type="text" id="house_no" name="house_no"
+                                                       class="form-control" value="{{ input['house_no'] }}"/>
+                                            </div>
+                                            {% if (isset($errors) && isset($errors["house_no"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["house_no"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
                                         </div>
-                                        {% if (isset($errors) && isset($errors["street_house_no"])): %}
-                                        <div style="color: red; margin-top: 10px; margin-bottom: 10px">
-                                            <small>{{ errors["street_house_no"] }}</small>
-                                            <br>
-                                        </div>
-                                        {% endif; %}
                                     </div><!-- //Straße und Haus Nr. -->
 
                                     <!-- PLZ und Stadt-->
@@ -179,17 +194,28 @@
                                     <div id="bill_address" style="display:none">
                                         <h4 class="fw-normal  mt-3 mb-4">Rechnungsadresse</h4>
                                         <!-- Straße und Haus Nr. -->
-                                        <div class="mb-2 pb-2">
-                                            <div class="form-outline">
-                                                <label class="form-label" for="bill_street_house_no">Straße und Haus
-                                                    Nr.</label>
-                                                <input type="text" id="bill_street_house_no" name="bill_street_house_no"
-                                                       class="form-control"
-                                                       value="{{ input['bill_street_house_no'] }}"/>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="bill_street">Straße</label>
+                                                    <input type="text" id="bill_street" name="bill_street"
+                                                           class="form-control" value="{{ input['bill_street'] }}"/>
+                                                </div>
                                             </div>
-                                            {% if (isset($errors) && isset($errors["bill_street_house_no"])): %}
+                                            {% if (isset($errors) && isset($errors["bill_street"])): %}
                                             <div style="color: red; margin-top: 10px; margin-bottom: 10px">
-                                                <small>{{ errors["bill_street_house_no"] }}</small>
+                                                <small>{{ errors["bill_street"] }}</small>
+                                                <br>
+                                            </div>
+                                            {% endif; %}
+                                            <div class="col-3">
+                                                <label for="bill_house_no">Hausnummer</label>
+                                                <input type="text" id="bill_house_no" name="bill_house_no"
+                                                       class="form-control" value="{{ input['bill_house_no'] }}"/>
+                                            </div>
+                                            {% if (isset($errors) && isset($errors["bill_house_no"])): %}
+                                            <div style="color: red; margin-top: 10px; margin-bottom: 10px">
+                                                <small>{{ errors["bill_house_no"] }}</small>
                                                 <br>
                                             </div>
                                             {% endif; %}

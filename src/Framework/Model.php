@@ -148,4 +148,21 @@ abstract class Model
         }
         return $stmt;
     }
+
+
+    protected function executeStatement($data, false|PDOStatement $stmt): bool
+    {
+        $i = 1;
+        foreach ($data as $value) {
+            $type = match (gettype($value)) {
+                "boolean" => PDO::PARAM_BOOL,
+                "integer" => PDO::PARAM_INT,
+                "NULL" => PDO::PARAM_NULL,
+                default => PDO::PARAM_STR
+            };
+            $stmt->bindValue($i++, $value, $type);
+        }
+
+        return $stmt->execute();
+    }
 }

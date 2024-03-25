@@ -28,13 +28,16 @@ class Register extends Controller
                 "email" => $this->request->post["email"],
                 "password" => $this->request->post["password"],
                 "confirm_password" => $this->request->post["confirm_password"],
-                "street_house_no" => $this->request->post["street_house_no"],
+                "street" => $this->request->post["street"],
+                "house_no" => $this->request->post["house_no"],
                 "post_code" => $this->request->post["post_code"],
                 "city" => $this->request->post["city"],
                 "phone" => $this->request->post["phone"],
                 "check_bill_address" => isset($this->request->post["check_bill_address"]) ? 1 : 0,
-                "bill_street_house_no" =>
-                    empty($this->request->post["bill_street_house_no"]) ? "" : $this->request->post["bill_street_house_no"],
+                "bill_street" =>
+                    empty($this->request->post["bill_street"]) ? "" : $this->request->post["bill_street"],
+                "bill_house_no" =>
+                    empty($this->request->post["bill_house_no"]) ? "" : $this->request->post["bill_house_no"],
                 "bill_post_code" =>
                     empty($this->request->post["bill_post_code"]) ? "" : $this->request->post["bill_post_code"],
                 "bill_city" =>
